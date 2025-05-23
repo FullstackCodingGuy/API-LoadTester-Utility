@@ -10,6 +10,10 @@ def summarize(csv_path):
     # Take only essential fields for compact summary
     summary_df = df[['LatencyMs', 'StatusCode', 'Timestamp']].copy()
 
+     # Take only the top 100 rows
+    summary_df = summary_df.head(100)
+
+
     # Convert to string table format
     csv_string = summary_df.to_csv(index=False)
 
@@ -36,15 +40,6 @@ Provide actionable recommendations to optimize API performance.
     print("\n=== Ollama Performance Summary ===")
     print(result.stdout)
 
-    # openai.api_key = os.getenv("OPENAI_API_KEY")
-    # response = openai.ChatCompletion.create(
-    #     model="gpt-4",
-    #     messages=[{"role": "user", "content": prompt}],
-    #     temperature=0.5
-    # )
-
-    # print("\n=== AI Performance Summary ===\n")
-    # print(response['choices'][0]['message']['content'])
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:

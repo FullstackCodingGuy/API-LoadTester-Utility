@@ -18,7 +18,7 @@ The SQLite DB benchmark_results.db will have all results logged.
 
 ### Analytics
 
-Ensure you have instaled python libs
+Ensure you have installed python libs
 
 ```
 pip install pandas scikit-learn
@@ -30,7 +30,7 @@ python AI/anomaly_detector.py Results/results.csv
 ```
 ![alt text](image-2.png)
 
-Step 3: Run OpenAI/Ollama summary:
+Step 3: Run LLM/Ollama summary:
 ```
 export OPENAI_API_KEY=your_key_here
 python AI/summarize_results.py Results/results.csv
