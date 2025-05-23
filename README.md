@@ -3,8 +3,8 @@
 
 ### Prerequisites
 
-.NET 9
-Python
+- .NET 9
+- Python
 
 ### Build and run with the config file:
 
@@ -28,7 +28,7 @@ Step 2: Run anomaly detection:
 ```
 python AI/anomaly_detector.py Results/results.csv
 ```
-![alt text](image.png)
+![alt text](image-2.png)
 
 Step 3: Run OpenAI/Ollama summary:
 ```
