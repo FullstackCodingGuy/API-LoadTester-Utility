@@ -21,7 +21,7 @@ The SQLite DB benchmark_results.db will have all results logged.
 Ensure you have installed python libs
 
 ```
-pip install pandas scikit-learn
+pip install pandas scikit-learn plotly
 ```
 
 Step 2: Run anomaly detection:
@@ -37,6 +37,12 @@ python AI/summarize_results.py Results/results.csv
 ```
 ![alt text](image-3.png)
 
+
+Step 4: Generate Dashboard Report
+```
+python AI/generate_dashboard.py Results/results.csv Results/dashboard.html
+```
+![alt text](image-4.png)
 
 ---
 ### Features
