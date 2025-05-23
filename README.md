@@ -14,6 +14,8 @@ dotnet run -- ./samples/sample_test.json
 ```
 The SQLite DB benchmark_results.db will have all results logged.
 
+![alt text](image-1.png)
+
 ### Analytics
 
 Ensure you have instaled python libs
@@ -26,6 +28,7 @@ Step 2: Run anomaly detection:
 ```
 python AI/anomaly_detector.py Results/results.csv
 ```
+![alt text](image.png)
 
 Step 3: Run OpenAI/Ollama summary:
 ```
