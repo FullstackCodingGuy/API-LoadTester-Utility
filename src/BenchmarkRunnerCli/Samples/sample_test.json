@@ -1,0 +1,7 @@
+{
+    "ApiUrl": "https://jsonplaceholder.typicode.com/posts",
+    "HttpMethod": "GET",
+    "ConcurrentRequests": 20,
+    "DurationSeconds": 15
+  }
+  
