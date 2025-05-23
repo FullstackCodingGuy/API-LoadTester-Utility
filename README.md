@@ -7,6 +7,14 @@ dotnet run -- ./samples/sample_test.json
 ```
 The SQLite DB benchmark_results.db will have all results logged.
 
+---
+### Features
+
+[x] Performance Summary printed in console
+[x] CSV Export to Results/results.csv for external use
+[x] Clean modular design with services separated by responsibility
+---
+
 
 # Key Focus Points
 
