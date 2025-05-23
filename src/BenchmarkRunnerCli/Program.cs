@@ -1,5 +1,6 @@
 ﻿using BenchmarkRunner.Services;
 using BenchmarkRunner.Utils;
+using BenchmarkRunner.Reports;
 
 class Program
 {
@@ -19,7 +20,9 @@ class Program
         }
 
         var config = ConfigLoader.LoadConfig(configPath);
-        using var logger = new SqliteLogger("benchmark_results.db");
+        const string dbPath = "benchmark_results.db";
+
+        using var logger = new SqliteLogger(dbPath);
         var loadTester = new LoadTester(logger);
 
         await loadTester.RunLoadTestAsync(
@@ -29,7 +32,11 @@ class Program
             config.DurationSeconds
         );
 
-        Console.WriteLine("Results logged to benchmark_results.db");
+        // Phase 2 Reporting
+        var reporter = new SummaryReporter(dbPath);
+        reporter.PrintSummary();
+
+        CsvExporter.Export(dbPath, "Results/results.csv");
 
         return 0;
     }
