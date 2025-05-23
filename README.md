@@ -8,6 +8,19 @@
 
 ### Build and run with the config file:
 
+
+Create a sample file for your test inside `src\BenchmarkRunnerCli\Samples\<yourtestfile.json>`
+Example
+```
+{
+   "ApiUrl": "https://jsonplaceholder.typicode.com/posts",
+   "HttpMethod": "GET",
+   "ConcurrentRequests": 20,
+   "DurationSeconds": 15
+}
+
+```
+
 ### Step 1: Run benchmark:
 ```
 dotnet run -- ./samples/sample_test.json
