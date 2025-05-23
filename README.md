@@ -1,6 +1,13 @@
 # API-LoadTester-Utility
 
 
+### Build and run with the config file:
+```
+dotnet run -- ./samples/sample_test.json
+```
+The SQLite DB benchmark_results.db will have all results logged.
+
+
 # Key Focus Points
 
 Creating a benchmarking tool for API services in C# that leverages AI can significantly enhance the precision, adaptability, and insights provided by traditional performance testing tools. Below are **AI-enhanced scenarios** that can be incorporated into your tool:
