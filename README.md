@@ -1,11 +1,38 @@
 # API-LoadTester-Utility
 
 
+### Prerequisites
+
+.NET 9
+Python
+
 ### Build and run with the config file:
+
+### Step 1: Run benchmark:
 ```
 dotnet run -- ./samples/sample_test.json
 ```
 The SQLite DB benchmark_results.db will have all results logged.
+
+### Analytics
+
+Ensure you have instaled python libs
+
+```
+pip install pandas scikit-learn
+```
+
+Step 2: Run anomaly detection:
+```
+python AI/anomaly_detector.py Results/results.csv
+```
+
+Step 3: Run OpenAI/Ollama summary:
+```
+export OPENAI_API_KEY=your_key_here
+python AI/summarize_results.py Results/results.csv
+```
+
 
 ---
 ### Features
@@ -13,6 +40,9 @@ The SQLite DB benchmark_results.db will have all results logged.
 - [x] Performance Summary printed in console
 - [x] CSV Export to Results/results.csv for external use
 - [x] Clean modular design with services separated by responsibility
+- [x] Anomaly Detection (Python)
+- [x] LLM Summary (OpenAI)
+- [x] Ollama Option
 ---
 
 
