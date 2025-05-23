@@ -35,6 +35,7 @@ Step 3: Run OpenAI/Ollama summary:
 export OPENAI_API_KEY=your_key_here
 python AI/summarize_results.py Results/results.csv
 ```
+![alt text](image-3.png)
 
 
 ---

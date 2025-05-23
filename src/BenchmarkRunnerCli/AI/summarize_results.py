@@ -1,54 +1,53 @@
-import openai
-import os
 import pandas as pd
 import sys
-
 import subprocess
 
-def ollama_summarize(prompt):
-    result = subprocess.run(
-        ["ollama", "run", "llama3", prompt],
-        capture_output=True, text=True
-    )
-    print("\n=== Ollama Summary ===")
-    print(result.stdout)
 
 
-
-# this function uses openAi to summarize the results
 def summarize(csv_path):
     df = pd.read_csv(csv_path)
 
-    avg_latency = df['LatencyMs'].mean()
-    min_latency = df['LatencyMs'].min()
-    max_latency = df['LatencyMs'].max()
-    total_requests = len(df)
+    # Take only essential fields for compact summary
+    summary_df = df[['LatencyMs', 'StatusCode', 'Timestamp']].copy()
 
-    status_counts = df['StatusCode'].value_counts().to_dict()
+    # Convert to string table format
+    csv_string = summary_df.to_csv(index=False)
 
     prompt = f"""
-    You are an expert performance engineer. Here is an API benchmark summary:
-    - Total requests: {total_requests}
-    - Average latency: {avg_latency:.2f} ms
-    - Min latency: {min_latency} ms
-    - Max latency: {max_latency} ms
-    - Status code breakdown: {status_counts}
+You are a performance engineering assistant.
 
-    Provide a professional summary of the test performance.
-    """
+Analyze the following API benchmark result CSV and identify:
+- Average, min, max latency, total requests, and error rate
+- Any patterns in latency over time
+- Any spikes or anomalies in response time
+- Distribution of HTTP status codes
+- Any insights or recommendations for improving performance
 
-    openai.api_key = os.getenv("OPENAI_API_KEY")  # Set in environment
-    response = openai.ChatCompletion.create(
-        model="gpt-4",  # or gpt-3.5-turbo
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.7
+Here is the data:{csv_string}
+Provide a professional performance analysis summary.
+Identify any performance bottlenecks, anomalies, or areas for improvement based on the data provided. 
+Provide actionable recommendations to optimize API performance.
+"""
+
+    result = subprocess.run(
+        ["ollama", "run", "llama3.2", prompt],
+        capture_output=True, text=True
     )
+    print("\n=== Ollama Performance Summary ===")
+    print(result.stdout)
 
-    print("\n=== AI Summary ===")
-    print(response['choices'][0]['message']['content'])
+    # openai.api_key = os.getenv("OPENAI_API_KEY")
+    # response = openai.ChatCompletion.create(
+    #     model="gpt-4",
+    #     messages=[{"role": "user", "content": prompt}],
+    #     temperature=0.5
+    # )
+
+    # print("\n=== AI Performance Summary ===\n")
+    # print(response['choices'][0]['message']['content'])
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python summarize_results.py <results.csv>")
+        print("Usage: python summarize_results.py Results/results.csv")
     else:
-        ollama_summarize(sys.argv[1])
+        summarize(sys.argv[1])
